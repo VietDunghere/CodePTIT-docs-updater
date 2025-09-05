@@ -14,9 +14,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-      - run: npm install
-      - name: Run update script
-        run: node update-doc.js
+      - name: Install dependencies
+        run: npm install
+      - name: Set up service account key
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_KEY }}
+          SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+        run: echo "$SERVICE_ACCOUNT_KEY" > src/resources/service-account.json
+        shell: bash
+      - name: Run update script
+        run: node src/app.js
+        env:
           DOC_ID: ${{ secrets.DOC_ID }}
+          CODEPTIT_USERNAME: ${{ secrets.CODEPTIT_USERNAME }}
+          CODEPTIT_PASSWORD: ${{ secrets.CODEPTIT_PASSWORD }}
+          COURSE_ID: ${{ secrets.COURSE_ID }}
