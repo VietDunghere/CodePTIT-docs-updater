@@ -25,7 +25,6 @@ getCodePtitCookie()
                 const incomplete_question_list = problemArray.filter(
                     (problem) => problem.problemStatus === 'Incomplete',
                 );
-                console.log(problemArray[220])
                 const complete_question_list = problemArray.filter((problem) => problem.problemStatus === 'Complete');
                 console.clear();
                 console.log('\x1b[32m%s\x1b[0m', `Login success!`);
