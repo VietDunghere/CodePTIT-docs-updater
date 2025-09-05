@@ -19,7 +19,9 @@ jobs:
       - name: Set up service account key
         env:
           SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
-        run: echo "$SERVICE_ACCOUNT_KEY" > src/resources/service-account.json
+        run: |
+          mkdir -p src/resources
+          echo "$SERVICE_ACCOUNT_KEY" > src/resources/service-account.json
         shell: bash
       - name: Run update script
         run: npm run start
