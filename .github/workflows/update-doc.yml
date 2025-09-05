@@ -1,0 +1,22 @@
+name: Update Google Doc
+
+on:
+  schedule:
+    - cron: "0 2 * * *"  # run every day at 2 AM UTC
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - run: npm install
+      - name: Run update script
+        run: node update-doc.js
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_KEY }}
+          DOC_ID: ${{ secrets.DOC_ID }}
