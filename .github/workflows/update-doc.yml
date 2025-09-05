@@ -13,7 +13,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 22
       - name: Install dependencies
         run: npm install
       - name: Set up service account key
@@ -22,7 +22,7 @@ jobs:
         run: echo "$SERVICE_ACCOUNT_KEY" > src/resources/service-account.json
         shell: bash
       - name: Run update script
-        run: node src/app.js
+        run: npm run start
         env:
           DOC_ID: ${{ secrets.DOC_ID }}
           CODEPTIT_USERNAME: ${{ secrets.CODEPTIT_USERNAME }}
